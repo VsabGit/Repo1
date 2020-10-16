@@ -1,0 +1,1 @@
+C:\Users\saammar\source\repos\SimplifiedTemplates\FriendEditor\FriendEditor.csproj;x64

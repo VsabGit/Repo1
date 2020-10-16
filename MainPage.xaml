@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="FriendEditor.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FriendEditor"
+    xmlns:controls="using:FriendEditor.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <CheckBox Grid.ColumnSpan="2" Content="Show navigation" Margin="10"
+              IsChecked="True" x:Name="chkNavigation"/>
+
+    <ListView Grid.Row="1" Width="200"
+              Visibility="{x:Bind chkNavigation.IsChecked,Mode=OneWay}"
+              ItemsSource="{x:Bind ViewModel.Friends}"
+              SelectedItem="{x:Bind ViewModel.SelectedFriend,Mode=TwoWay}"
+              ItemTemplate="{StaticResource friendTemplate}"/>
+    <controls:FriendDetailControl
+      Grid.Row="1" Grid.Column="1"
+      Friend="{x:Bind ViewModel.SelectedFriend,Mode=OneWay}"
+      Visibility="{x:Bind ViewModel.IsFriendSelected,Mode=OneWay}"/>
+
+    <Button Grid.Row="2" Grid.ColumnSpan="2" Content="Delete friend"
+            Click="{x:Bind ViewModel.DeleteFriend}"
+            IsEnabled="{x:Bind ViewModel.IsFriendSelected,Mode=OneWay}"
+            Margin="10"/>
+  </Grid>
+</Page>
